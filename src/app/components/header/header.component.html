@@ -1,0 +1,78 @@
+
+
+<div class="my-header">
+
+  <div class="left-side col-md-3">
+    <!-- <a routerLink="/"> -->
+      <a [routerLink]="role === 'admin' ? 'admin-dashboard/requests' : role === 'seller' ? 'seller-dashboard/list-auctions' : role === 'buyer' ? 'buyer-dashboard/list-bids' : '/'">
+      <img src="assets//logo.png" class="logo-image" alt="Logo">
+    </a>
+  </div>
+
+  <div class="right-side col-md-9">
+    <section>
+      <div class="top-bar">
+        <div class="px-2 d-flex">
+          <fa-icon [icon]="faEnvelope" class="fa-md px-2" style="color: #5A5A5A;"></fa-icon>
+          <p style="color: #5A5A5A;">eauction@briskon.com</p>
+        </div>
+        <div class="px-2 d-flex">
+          <fa-icon [icon]="faPhone" class="fa-md px-2" style="color: #5A5A5A;"></fa-icon>
+          <p style="color: #5A5A5A;">+91 7506325219</p>
+        </div>
+
+        <div class="px-2 d-flex" style="margin-right: 10px; cursor: pointer;" routerLink="wishlist">
+          <fa-icon [icon]="faHeart" class="fa-md px-2" style="color: #F37039;"></fa-icon>
+          <p style="color: #5A5A5A;">(9) WISHLIST</p>
+        </div>
+
+        <div class="px-2 d-flex" style="margin-right: 10px; cursor: pointer;" *ngIf="loggedIn" [routerLink]="role === 'admin' ? 'admin-dashboard/my-profile' : role === 'seller' ? 'seller-dashboard/my-profile' : 'buyer-dashboard/my-profile'">
+          <fa-icon [icon]="faUser" class="fa-md px-2" style="color: #F37039;"></fa-icon>
+          <p style="color: #5A5A5A; text-transform: uppercase;">
+            Hi,
+            {{userName}}</p>
+        </div>
+
+        <button *ngIf="loggedIn" (click)="logout()" class="btn">Logout</button>
+
+        <button *ngIf="loggedOut" routerLink="login" class="btn">LOGIN</button>
+
+        <button *ngIf="loggedOut" routerLink="register" class="btn">REGISTER</button>
+
+      </div>
+    </section>
+
+    <nav class="navbar my-nav">
+      <div>
+        <ul class="navbar-nav">
+          <li>
+            <a routerLink="categories">CATEGORIES</a>
+          </li>
+          <li>
+            <a routerLink="/auction-calendar">AUCTION CALENDAR</a>
+          </li>
+          <li>
+            <a routerLink="company">COMPANY</a>
+          </li>
+          <li>
+            <a routerLink="resources">RESOURCES</a>
+          </li>
+          <li>
+            <a routerLink="contact-us">CONTACT US</a>
+          </li>
+
+          <a (click)="toggleSearch()">
+            <fa-icon [icon]="faSearch" class="px-2 faSearch" style="color: #F37039;"></fa-icon>
+          </a>
+
+        </ul>
+      </div>
+
+      <input type="text" class="search-bar" placeholder="Type and press enter to search" style="display: none;">
+      <a (click)="toggleMenu()">
+        <fa-icon [icon]="faTimes" class="px-2 faTimes" style="color: #F37039; display: none;"></fa-icon>
+      </a>
+
+    </nav>
+  </div>
+</div>

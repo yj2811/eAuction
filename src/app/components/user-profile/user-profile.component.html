@@ -1,0 +1,204 @@
+<div class="form-container">
+  <form class="form mt-4 col-md-10" [formGroup]="editUserForm" nonvalidate>
+    <h2 style="color: #0071B9; font-size: 22px; font-weight: 500; margin-top: 10px">Personal Details</h2>
+
+    <div class="personal-details">
+
+      <div class="form-group row">
+        <label for="firstName" class="col-md-4 col-form-label">First Name</label>
+        <div class="col-md-6">
+          <input id="firstName" name="firstName" formControlName="firstName" type="text" class="form-control"
+            placeholder="Enter First Name" />
+          <div *ngIf="editUserForm?.get('firstName')?.touched && editUserForm.get('firstName')?.invalid"
+            class="text-danger small">
+            <div *ngIf="editUserForm?.get('firstName').errors['required']">First Name is required.</div>
+            <div *ngIf="editUserForm?.get('firstName').errors['maxlength']">Maximum length is 50 characters.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="lastName" class="col-md-4 col-form-label">Last Name</label>
+        <div class="col-md-6">
+          <input id="lastName" name="lastName" formControlName="lastName" type="text" class="form-control"
+            placeholder="Enter Last Name" />
+          <div *ngIf="editUserForm?.get('lastName')?.touched && editUserForm.get('lastName')?.invalid"
+            class="text-danger small">
+            <div *ngIf="editUserForm?.get('lastName').errors['required']">Last Name is required.</div>
+            <div *ngIf="editUserForm?.get('lastName').errors['maxlength']">Maximum length is 50 characters.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="email" class="col-md-4 col-form-label">Email</label>
+        <div class="col-md-6">
+          <input id="email" name="email" formControlName="email" type="email" class="form-control"
+            placeholder="Enter Email" />
+          <div *ngIf="editUserForm?.get('email')?.touched && editUserForm.get('email')?.invalid"
+            class="text-danger small">
+            <div *ngIf="editUserForm?.get('email').errors['required']">Email is required.</div>
+            <div *ngIf="editUserForm?.get('email').errors['email']">Invalid email format.</div>
+            <div *ngIf="editUserForm?.get('email').errors['maxlength']">Maximum length is 100 characters.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="mobile" class="col-md-4 col-form-label">Mobile</label>
+        <div class="col-md-6">
+          <input id="mobile" name="mobile" formControlName="mobile" type="text" class="form-control"
+            placeholder="Enter Mobile Number" />
+          <div *ngIf="editUserForm?.get('mobile')?.touched && editUserForm.get('mobile')?.invalid"
+            class="text-danger small">
+            <div *ngIf="editUserForm?.get('mobile').errors['required']">Mobile Number is required.</div>
+            <div *ngIf="editUserForm?.get('mobile').errors['pattern']">Please enter a valid Mobile Number.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <h2 style="color: #0071B9; font-size: 22px; font-weight: 500; margin-top: 10px">Address Details</h2>
+
+    <div class="address-details">
+
+      <div class="form-group row">
+        <label for="address" class="col-md-4 col-form-label">Address</label>
+        <div class="col-md-6">
+          <input id="address" name="address" formControlName="address" type="text" class="form-control"
+            placeholder="Enter Address" />
+          <div *ngIf="editUserForm?.get('address')?.touched && editUserForm.get('address')?.invalid"
+            class="text-danger small">
+            <div *ngIf="editUserForm?.get('address').errors['required']">Address is required.</div>
+            <div *ngIf="editUserForm?.get('address').errors['maxlength']">Address cannot exceed 255 characters.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="city" class="col-md-4 col-form-label">City</label>
+        <div class="col-md-6">
+          <input id="city" name="city" formControlName="city" type="text" class="form-control"
+            placeholder="Enter City" />
+          <div *ngIf="editUserForm?.get('city')?.touched && editUserForm.get('city')?.invalid"
+            class="text-danger small">
+            <div *ngIf="editUserForm?.get('city').errors['required']">City is required.</div>
+            <div *ngIf="editUserForm?.get('city').errors['maxlength']">City cannot exceed 100 characters.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="state" class="col-md-4 col-form-label">State</label>
+        <div class="col-md-6">
+          <input id="state" name="state" formControlName="state" type="text" class="form-control"
+            placeholder="Enter State" />
+          <div *ngIf="editUserForm?.get('state')?.touched && editUserForm.get('state')?.invalid"
+            class="text-danger small">
+            <div *ngIf="editUserForm?.get('state').errors['required']">State is required.</div>
+            <div *ngIf="editUserForm?.get('state').errors['maxlength']">State cannot exceed 100 characters.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="country" class="col-md-4 col-form-label">Country</label>
+        <div class="col-md-6">
+          <input id="country" name="country" formControlName="country" type="text" class="form-control"
+            placeholder="Enter Country" />
+          <div *ngIf="editUserForm?.get('country')?.touched && editUserForm.get('country')?.invalid"
+            class="text-danger small">
+            <div *ngIf="editUserForm?.get('country').errors['required']">Country is required.</div>
+            <div *ngIf="editUserForm?.get('country').errors['maxlength']">Country cannot be more than 100 characters
+              long.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="postalCode" class="col-md-4 col-form-label">Postal Code</label>
+        <div class="col-md-6">
+          <input id="postalCode" name="postalCode" formControlName="postalCode" type="text" class="form-control"
+            placeholder="Enter Postal Code" />
+          <div *ngIf="editUserForm?.get('postalCode')?.touched && editUserForm.get('postalCode')?.invalid"
+            class="text-danger small">
+            <div *ngIf="editUserForm?.get('postalCode').errors['required']">Postal Code is required.</div>
+            <div *ngIf="editUserForm?.get('postalCode').errors['maxlength']">Postal Code cannot be more than 20
+              characters long.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <h2 style="color: #0071B9; font-size: 22px; font-weight: 500; margin-top: 10px">Company Details</h2>
+
+    <div class="company-details">
+
+      <div class="form-group row">
+        <label for="companyName" class="col-md-4 col-form-label">Company Name</label>
+        <div class="col-md-6">
+          <input id="companyName" name="companyName" formControlName="companyName" type="text" class="form-control"
+            placeholder="Enter Company Name" />
+          <div *ngIf="editUserForm?.get('companyName')?.touched && editUserForm.get('companyName')?.invalid"
+            class="text-danger small">
+            <div *ngIf="editUserForm?.get('companyName').errors['required']">Company Name is required.</div>
+            <div *ngIf="editUserForm?.get('companyName').errors['maxlength']">Company Name cannot be more than 255
+              characters long.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="companyAccount" class="col-md-4 col-form-label">Company Account</label>
+        <div class="col-md-6">
+          <input id="companyAccount" name="companyAccount" formControlName="companyAccount" type="text"
+            class="form-control" placeholder="Enter Company Account" />
+          <div *ngIf="editUserForm?.get('companyAccount')?.touched && editUserForm.get('companyAccount')?.invalid"
+            class="text-danger small">
+            <div *ngIf="editUserForm?.get('companyAccount').errors['required']">Company Account is required.</div>
+            <div *ngIf="editUserForm?.get('companyAccount').errors['maxlength']">Maximum length of Company Account is
+              50.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="companyBank" class="col-md-4 col-form-label">Company Bank</label>
+        <div class="col-md-6">
+          <input id="companyBank" name="companyBank" formControlName="companyBank" type="text" class="form-control"
+            placeholder="Enter Company Bank" />
+          <div *ngIf="editUserForm?.get('companyBank')?.touched && editUserForm.get('companyBank')?.invalid"
+            class="text-danger small">
+            <div *ngIf="editUserForm?.get('companyBank').errors['required']">Company Bank is required.</div>
+            <div *ngIf="editUserForm?.get('companyBank').errors['maxlength']">Maximum length of Company Bank is 100.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="bankIFSC" class="col-md-4 col-form-label">Bank IFSC</label>
+        <div class="col-md-6">
+          <input id="bankIFSC" name="bankIFSC" formControlName="bankIFSC" type="text" class="form-control"
+            placeholder="Enter Bank IFSC" />
+          <div *ngIf="editUserForm?.get('bankIFSC')?.touched && editUserForm.get('bankIFSC')?.invalid"
+            class="text-danger small">
+            <div *ngIf="editUserForm?.get('bankIFSC').errors['required']">Bank IFSC is required.</div>
+            <div *ngIf="editUserForm?.get('bankIFSC').errors['maxlength']">Maximum length of Bank IFSC is 20.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>
+
+
+<div class="btn-container">
+  <a class="my-btn" (click)="editUser()">Update</a>
+  <a class="my-btn" (click)="cancelUpdate()" *ngIf="admin">Cancel</a>
+  <a class="my-btn" (click)="cancelUpdate()" *ngIf="seller">Cancel</a>
+  <a class="my-btn" (click)="cancelUpdate()" *ngIf="buyer">Cancel</a>
+</div>

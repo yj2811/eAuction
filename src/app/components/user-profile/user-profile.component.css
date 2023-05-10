@@ -1,0 +1,41 @@
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.personal-details,
+.address-details,
+.company-details {
+  background-color: #F2F2F2;
+  border-radius: 2px;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.btn-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.my-btn {
+  background-color: #F37039;
+  color: white;
+  border-radius: 2px;
+  font-size: 18px;
+  font-weight: 400;
+  padding: 5px 5px 5px 5px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.my-btn:hover {
+  text-decoration: none;
+  color: #F37039;
+  background-color: white;
+  border: 1px solid #F37039;
+}
+

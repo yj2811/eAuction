@@ -1,0 +1,219 @@
+<h2 style="color: #0071B9; font-size: 24px; font-weight: 600; margin-top: 28px">New User Requests</h2>
+<!-- <mat-form-field>
+  <input matInput placeholder="Search" class="my-filter-input" (keyup)="usersFilterChange($event)">
+</mat-form-field> -->
+<div class="top">
+  <form class="my-form-field">
+    <input placeholder="Search" class="my-filter-input" (keyup)="usersFilterChange($event)">
+  </form>
+</div>
+
+<div class="mat-elevation-z3" style="display: inline-table;">
+
+  <table mat-table matSort [dataSource]="usersDataSource" class="mat-elevation-z3">
+
+    <ng-container matColumnDef="sNo">
+      <th mat-header-cell *matHeaderCellDef style="background-color: #494848;"> S No. </th>
+      <td mat-cell *matCellDef="let item; let i = index">
+        {{ (paginatorRef.pageIndex * paginatorRef.pageSize) + (i + 1) }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="userId">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> User Id </th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="element.role === 'seller'">
+          SLR{{element.userId}}
+        </ng-container>
+        <ng-container *ngIf="element.role === 'buyer'">
+          BYR{{element.userId}}
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Role </th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="element.role === 'seller'">
+          Seller
+        </ng-container>
+        <ng-container *ngIf="element.role === 'buyer'">
+          Buyer
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="userName">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> User Name </th>
+      <td mat-cell *matCellDef="let element" style="white-space: nowrap;">{{element.firstName}} {{element.lastName}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="handleStatus">
+      <th mat-header-cell *matHeaderCellDef style="background-color: #494848;"> Handle Status </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-button-toggle-group [(ngModel)]="element.status">
+          <mat-button-toggle class="approve-button" value="approved" (click)="approveUser(element)">Approve
+          </mat-button-toggle>
+          <mat-button-toggle class="deny-button" value="denied" (click)="denyUser(element)">Deny</mat-button-toggle>
+        </mat-button-toggle-group>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="usersDisplayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: usersDisplayedColumns;" class="my-table-row"></tr>
+  </table>
+
+  <mat-paginator class="my-paginator" #paginatorRef [length]="usersDataSource?.data?.length" [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+
+</div>
+<mat-divider class="my-divider"></mat-divider>
+
+
+<h2 style="color: #0071B9; font-size: 24px; font-weight: 600; margin-top: 28px">New Category Requests</h2>
+<!-- <mat-form-field>
+  <input matInput placeholder="Search" class="my-filter-input" (keyup)="categoriesFilterChange($event)">
+</mat-form-field> -->
+<div class="top">
+  <form class="my-form-field">
+    <input placeholder="Search" class="my-filter-input" (keyup)="categoriesFilterChange($event)">
+  </form>
+</div>
+
+<div class="mat-elevation-z3" style="display: inline-table;">
+
+  <table mat-table matSort [dataSource]="categoriesDataSource" class="mat-elevation-z3">
+
+    <ng-container matColumnDef="sNo">
+      <th mat-header-cell *matHeaderCellDef style="background-color: #494848;"> S No. </th>
+      <td mat-cell *matCellDef="let item; let i = index">
+        {{ (paginatorRef.pageIndex * paginatorRef.pageSize) + (i + 1) }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="categoryId">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Category Id </th>
+      <td mat-cell *matCellDef="let element"> CAT{{element.categoryId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="categoryName">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Category Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="handleStatus">
+      <th mat-header-cell *matHeaderCellDef style="background-color: #494848;"> Handle Status </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-button-toggle-group [(ngModel)]="element.status">
+          <mat-button-toggle class="approve-button" value="approved" (click)="approveCategory(element)">Approve
+          </mat-button-toggle>
+          <mat-button-toggle class="deny-button" value="denied" (click)="denyCategory(element)">Deny</mat-button-toggle>
+        </mat-button-toggle-group>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="categoriesDisplayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: categoriesDisplayedColumns;" class="my-table-row"></tr>
+  </table>
+
+  <mat-paginator class="my-paginator" #paginatorRef [length]="categoriesDataSource?.data?.length" [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+
+</div>
+
+
+<mat-divider class="my-divider"></mat-divider>
+<h2 style="color: #0071B9; font-size: 24px; font-weight: 600; margin-top: 28px">New Auction Requests</h2>
+
+<!-- <mat-form-field>
+  <input matInput placeholder="Search" class="my-filter-input" (keyup)="auctionsFilterChange($event)">
+</mat-form-field> -->
+<div class="top">
+  <form class="my-form-field">
+    <input placeholder="Search" class="my-filter-input" (keyup)="auctionsFilterChange($event)">
+  </form>
+</div>
+
+<div class="mat-elevation-z3" style="display: inline-table;">
+
+  <table mat-table matSort [dataSource]="auctionsDataSource" class="mat-elevation-z3">
+
+    <ng-container matColumnDef="sNo">
+      <th mat-header-cell *matHeaderCellDef style="background-color: #494848;"> S No. </th>
+      <td mat-cell *matCellDef="let item; let i = index">
+        {{ (paginatorRef.pageIndex * paginatorRef.pageSize) + (i + 1) }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="auctionId">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Auction Id </th>
+      <td mat-cell *matCellDef="let element"> AUC{{element.auctionId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="productName">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Product Name </th>
+      <td mat-cell *matCellDef="let element" style="color: #00416D; cursor: pointer;"> <a (click)="viewAuction(element)">{{ getProductName(element.productId) }} </a></td>
+    </ng-container>
+
+    <ng-container matColumnDef="startDate">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Start Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="endDate">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> End Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="startBidAmount">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Start Bid Amount </th>
+      <td mat-cell *matCellDef="let element"> {{element.startBidAmount}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="minIncrementValue">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Min Increment Value </th>
+      <td mat-cell *matCellDef="let element"> {{element.minIncrementValue}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="availableQty">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Available Qty </th>
+      <td mat-cell *matCellDef="let element"> {{element.availableQty}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="handleStatus">
+      <th mat-header-cell *matHeaderCellDef style="background-color: #494848;"> Handle Status </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-button-toggle-group [(ngModel)]="element.status">
+          <mat-button-toggle class="approve-button" value="approved" (click)="approveAuction(element)">Approve
+          </mat-button-toggle>
+          <mat-button-toggle class="deny-button" value="denied" (click)="denyAuction(element)">Deny</mat-button-toggle>
+        </mat-button-toggle-group>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="auctionsDisplayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: auctionsDisplayedColumns;" class="my-table-row"></tr>
+  </table>
+
+  <mat-paginator class="my-paginator" #paginatorRef [length]="auctionsDataSource?.data?.length" [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+
+</div>
+
+<mat-divider class="my-divider"></mat-divider>

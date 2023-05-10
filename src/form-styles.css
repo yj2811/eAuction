@@ -1,0 +1,76 @@
+/* writing common CSS for forms */
+
+.form-container {
+  width: 100%;
+  margin: 10px auto;
+  padding: 20px auto;
+  border: 1px solid #ddd;
+  background-color: #f5f5f5;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.col-form-label {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.form-control {
+  display: flex;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 2px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: #F37039;
+  outline: none;
+}
+
+textarea.form-control {
+  resize: vertical;
+}
+
+.submit-btn {
+  /* background-color: #78B75C; */
+  background-color: #0072BA;
+  color: white;
+  border-radius: 2px;
+  font-size: 18px;
+  font-weight: 400;
+  padding: 8px 8px 8px 8px;
+  margin-left: 150px;
+  margin-right: 50px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  /* background-color: #E65B65; */
+  background-color: #0072BA;
+  color: white;
+  border-radius: 2px;
+  font-size: 18px;
+  font-weight: 400;
+  padding: 8px 8px 8px 8px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  text-decoration: none;
+}
+
+.cancel-btn:hover {
+  text-decoration: none;
+}

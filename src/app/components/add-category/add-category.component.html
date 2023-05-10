@@ -1,0 +1,32 @@
+<h2 style="color: #0071B9; font-size: 28px; font-weight: 600; margin-top: 28px">Add Category</h2>
+
+<div class="form-container mat-elevation-z3">
+  <form class="form mt-4 col-md-10" [formGroup]="addCategoryForm" nonvalidate>
+    <div class="form-group row">
+      <label for="categoryName" class="col-md-4 col-form-label">Category Name</label>
+      <div class="col-md-6">
+        <input id="categoryName" name="categoryName" formControlName="categoryName" type="text" class="form-control"
+          placeholder="Enter Category Name" />
+        <div *ngIf="addCategoryForm?.get('categoryName')?.touched && addCategoryForm.get('categoryName')?.invalid"
+          class="text-danger small">
+          <div *ngIf="addCategoryForm?.get('categoryName').errors['required']">Category Name is required.</div>
+          <div *ngIf="addCategoryForm?.get('categoryName').errors['maxlength']">Category Name must be less than 40
+            characters.</div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-container">
+      <a class="submit-btn" (click)="addCategory()">Submit</a>
+      <a class="cancel-btn" routerLink='/admin-dashboard/list-categories' *ngIf="admin">Cancel</a>
+      <a class="cancel-btn" routerLink='/seller-dashboard/list-categories' *ngIf="user">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<div class="btn-container">
+  <a routerLink='/admin-dashboard/list-categories' class="view-categories-btn" *ngIf="admin">View Categories</a>
+  <a routerLink='/seller-dashboard/list-categories' class="view-categories-btn" *ngIf="user">View Categories</a>
+</div>
+
+
+

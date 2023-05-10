@@ -1,0 +1,115 @@
+<h2 style="color: #0071B9; font-size: 28px; font-weight: 600; margin-top: 28px">Add Auction</h2>
+
+<div class="form-container mat-elevation-z3">
+  <form class="form mt-4 col-md-10" [formGroup]="addAuctionForm" nonvalidate>
+
+    <div class="form-group row">
+      <label for="productId" class="col-md-4 col-form-label">Product</label>
+      <div class="col-md-6">
+        <select id="productId" name="productId" [formControlName]="'productId'" class="form-control">
+          <option value="" disabled selected>Select Product</option>
+          <option *ngFor="let product of products" [value]="product.productId">{{ product.productName }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="startDate" class="col-md-4 col-form-label">Start Date</label>
+      <div class="col-md-6">
+        <input id="startDate" name="startDate" formControlName="startDate" type="datetime-local"
+          class="form-control" />
+        <div *ngIf="addAuctionForm?.get('startDate')?.touched && addAuctionForm.get('startDate')?.invalid"
+          class="text-danger small">
+          <div *ngIf="addAuctionForm?.get('startDate').errors['required']">Start Date is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="endDate" class="col-md-4 col-form-label">End Date</label>
+      <div class="col-md-6">
+        <input id="endDate" name="endDate" formControlName="endDate" type="datetime-local"
+          class="form-control" />
+        <div *ngIf="addAuctionForm?.get('endDate')?.touched && addAuctionForm.get('endDate')?.invalid"
+          class="text-danger small">
+          <div *ngIf="addAuctionForm?.get('endDate').errors['required']">End Date is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="emdAmount" class="col-md-4 col-form-label">EMD Amount</label>
+      <div class="col-md-6">
+        <div class="input-group">
+          <input id="emdAmount" name="emdAmount" formControlName="emdAmount" type="text"
+            class="form-control" placeholder="EMD Amount (e.g. 50.00)" />
+        </div>
+        <div *ngIf="addAuctionForm?.get('emdAmount')?.touched && addAuctionForm.get('emdAmount')?.invalid"
+          class="text-danger small">
+          <div *ngIf="addAuctionForm?.get('emdAmount').errors['min']">EMD Amount cannot be negative.</div>
+          <div *ngIf="addAuctionForm?.get('emdAmount').errors['pattern']">EMD Amount must be a valid decimal number with up to 2 decimal places (e.g. 50.00).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="startBidAmount" class="col-md-4 col-form-label">Start Bid Amount</label>
+      <div class="col-md-6">
+        <div class="input-group">
+          <input id="startBidAmount" name="startBidAmount" formControlName="startBidAmount" type="text"
+            class="form-control" placeholder="Start Bid Amount (e.g. 50.00)" />
+        </div>
+        <div *ngIf="addAuctionForm?.get('startBidAmount')?.touched && addAuctionForm.get('startBidAmount')?.invalid"
+          class="text-danger small">
+          <div *ngIf="addAuctionForm?.get('startBidAmount').errors['min']">Start Bid Amount cannot be negative.</div>
+          <div *ngIf="addAuctionForm?.get('startBidAmount').errors['pattern']">Start Bid Amount must be a valid decimal number with up to 2 decimal places (e.g. 50.00).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="minIncrementValue" class="col-md-4 col-form-label">Min Increment Value</label>
+      <div class="col-md-6">
+        <div class="input-group">
+          <input id="minIncrementValue" name="minIncrementValue" formControlName="minIncrementValue" type="text"
+            class="form-control" placeholder="Min Increment Value (e.g. 10.00)" />
+        </div>
+        <div *ngIf="addAuctionForm?.get('minIncrementValue')?.touched && addAuctionForm.get('minIncrementValue')?.invalid"
+          class="text-danger small">
+          <div *ngIf="addAuctionForm?.get('minIncrementValue').errors['min']">Min Increment Value cannot be negative.</div>
+          <div *ngIf="addAuctionForm?.get('minIncrementValue').errors['pattern']">Min Increment Value must be a valid decimal number with up to 2 decimal places (e.g. 10.00).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="availableQty" class="col-md-4 col-form-label">Available Quantity</label>
+      <div class="col-md-6">
+        <div class="input-group">
+          <input id="availableQty" name="availableQty" formControlName="availableQty" type="text"
+            class="form-control" placeholder="Available Quantity" />
+        </div>
+        <div *ngIf="addAuctionForm?.get('availableQty')?.touched && addAuctionForm.get('availableQty')?.invalid"
+          class="text-danger small">
+          <div *ngIf="addAuctionForm?.get('availableQty').errors['min']">Available Quantity cannot be negative.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <a class="submit-btn" (click)="addAuction()">Submit</a>
+      <a class="cancel-btn" routerLink='/admin-dashboard/list-auctions' *ngIf="admin">Cancel</a>
+      <a class="cancel-btn" routerLink='/seller-dashboard/list-auctions' *ngIf="user">Cancel</a>
+    </div>
+
+  </form>
+</div>
+
+
+<div class="btn-container">
+  <a routerLink='/admin-dashboard/list-auctions' class="view-auctions-btn" *ngIf="admin">View Auctions</a>
+  <a routerLink='/seller-dashboard/list-auctions' class="view-auctions-btn" *ngIf="user">View Auctions</a>
+</div>
+
+
+

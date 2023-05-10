@@ -1,0 +1,111 @@
+<h2 style="color: #0071B9; font-size: 28px; font-weight: 600; margin-top: 28px">Add Product</h2>
+
+<div class="form-container mat-elevation-z3">
+  <form class="form mt-4 col-md-10" [formGroup]="addProductForm" nonvalidate>
+
+    <div class="form-group row">
+      <label for="categoryId" class="col-md-4 col-form-label">Category</label>
+      <div class="col-md-6">
+        <select id="categoryId" name="categoryId" [formControlName]="'categoryId'" class="form-control">
+          <option value="" disabled selected>Select Category</option>
+          <option *ngFor="let category of categories" [value]="category.categoryId">{{ category.categoryName }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row" *ngIf="admin">
+      <label for="categoryId" class="col-md-4 col-form-label">Seller</label>
+      <div class="col-md-6">
+        <select id="sellerId" name="sellerId" [formControlName]="'sellerId'" class="form-control">
+          <option value="" disabled selected>Select Seller</option>
+          <option *ngFor="let seller of sellers" [value]="seller.userId">{{ seller.firstName }} {{ seller.lastName }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="productName" class="col-md-4 col-form-label">Name</label>
+      <div class="col-md-6">
+        <input id="productName" name="productName" formControlName="productName" type="text" class="form-control"
+          placeholder="Enter Product Name" />
+        <div *ngIf="addProductForm?.get('productName')?.touched && addProductForm.get('productName')?.invalid"
+          class="text-danger small">
+          <div *ngIf="addProductForm?.get('productName').errors['required']">Product Name is required.</div>
+          <div *ngIf="addProductForm?.get('productName').errors['maxlength']">Product Name must be less than 40
+            characters.</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <label for="productDesc" class="col-md-4 col-form-label">Description</label>
+      <div class="col-md-6">
+        <textarea id="productDesc" name="productDesc" formControlName="productDesc" rows="4" class="form-control"
+          placeholder="Enter Product Description"></textarea>
+        <div *ngIf="addProductForm?.get('productDesc')?.touched && addProductForm.get('productDesc')?.invalid"
+          class="text-danger small">
+          <div *ngIf="addProductForm?.get('productDesc').errors['required']">Product Description is required.</div>
+          <div *ngIf="addProductForm?.get('productDesc').errors['maxlength']">Product Description must be less than
+            65535
+            characters.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="productFeatures" class="col-md-4 col-form-label">Features</label>
+      <div class="col-md-6">
+        <textarea id="productFeatures" name="productFeatures" formControlName="productFeatures" rows="4"
+          class="form-control" placeholder="Enter Product Features"></textarea>
+        <div *ngIf="addProductForm?.get('productFeatures')?.touched && addProductForm.get('productFeatures')?.invalid"
+          class="text-danger small">
+          <div *ngIf="addProductForm?.get('productFeatures').errors['required']">Product Features are required.</div>
+          <div *ngIf="addProductForm?.get('productFeatures').errors['maxlength']">Product Features must be less than
+            65535
+            characters.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="productYOM" class="col-md-4 col-form-label">Year of Manufacture</label>
+      <div class="col-md-6">
+        <input id="productYOM" name="productYOM" formControlName="productYOM" type="text" class="form-control"
+          placeholder="Enter Year of Manufacture (e.g. 2021)" />
+        <div *ngIf="addProductForm?.get('productYOM')?.touched && addProductForm.get('productYOM')?.invalid"
+          class="text-danger small">
+          <div *ngIf="addProductForm?.get('productYOM').errors['required']">Year of Manufacture is required.</div>
+          <div *ngIf="addProductForm?.get('productYOM').errors['pattern']">Year of Manufacture must be a valid 4-digit
+            year (e.g. 2021).</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <label for="productImage" class="col-md-4 col-form-label">Image</label>
+      <div class="col-md-6">
+
+          <!-- <input type="file" (change)="onFileSelect($event)">
+          <input id="productImage" name="productImage" formControlName="productImage" type="text" class="form-control" readonly/> -->
+
+          <input type="file" (change)="onFileSelect($event)" multiple/>
+          <input id="productImage" name="productImage" formControlName="productImage" type="text" class="form-control" readonly/>
+
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <a class="submit-btn" (click)="addProduct()">Submit</a>
+      <a class="cancel-btn" routerLink='/admin-dashboard/list-products' *ngIf="admin">Cancel</a>
+      <a class="cancel-btn" routerLink='/seller-dashboard/list-products' *ngIf="user">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<div class="btn-container">
+  <a routerLink='/admin-dashboard/list-products' class="view-products-btn" *ngIf="admin">View Products</a>
+  <a routerLink='/seller-dashboard/list-products' class="view-products-btn" *ngIf="user">View Products</a>
+</div>

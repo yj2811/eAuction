@@ -1,0 +1,22 @@
+.btn-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.view-products-btn {
+  background-color: #F37039;
+  color: white;
+  border-radius: 2px;
+  font-size: 18px;
+  font-weight: 400;
+  padding: 5px 5px 5px 5px;
+}
+
+.view-products-btn:hover {
+  text-decoration: none;
+  color: #F37039;
+  background-color: white;
+  border: 1px solid #F37039;
+}

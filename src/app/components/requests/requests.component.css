@@ -1,0 +1,38 @@
+.approve-button {
+  margin-right: 5px !important;
+  background-color: #C8E6C9;
+  margin: 2px;
+}
+
+.approve-button.mat-button-toggle-checked {
+  background-color: #66BB6A;
+}
+
+.deny-button {
+  background-color: #FFCDD2;
+  margin: 2px;
+}
+
+.deny-button.mat-button-toggle-checked {
+  background-color: #E57373;
+}
+
+.top {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.my-filter-input {
+  padding: 4px;
+  font-size: 15px;
+  color: #575757;
+  width: 50px;
+  margin-bottom: 22px;
+}
+
+.my-filter-input:focus {
+  outline: none;
+  border-radius: 2px;
+  border: 2px solid #0072BB;
+}

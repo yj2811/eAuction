@@ -1,0 +1,395 @@
+<div class="product">
+
+  <!-- <div class=" product-image-container col-md-5">
+    <img class="product-image" [src]="imgBasePath + getProduct(auction?.productId)?.productImage" />
+  </div> -->
+
+  <div class="product-image-container col-md-5">
+    <img class="product-image" [src]="imgBasePath + selectedImage" />
+
+    <div class="image-slider" *ngIf="(imgNames.length > 1)">
+      <div *ngFor="let imgName of imgNames" class="slide">
+        <img class="product-slider-image" [src]="imgBasePath + imgName" (click)="onImageClick(imgName)"/>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="product-details col-md-7">
+    <div>
+      <h2 style="margin-top: 20px; color: #194274; font-size: 36px;">
+        {{ getProduct(auction?.productId)?.productName }}
+      </h2>
+
+      <h5 style="color: #194274; font-size: 16px;"><span> (Category:
+          {{ getCategory(getProduct(auction?.productId)?.categoryId)?.categoryName }}) </span>
+      </h5>
+      <h5 style="color: #3b3b3b; font-size: 14px;">
+        <span>{{ getProduct(auction?.productId)?.productDesc }} |
+          {{ getProduct(auction?.productId)?.productFeatures }}</span>
+      </h5>
+      <h5 style="color: #3b3b3b; font-size: 14px;"><span>Year of Manufacturing :</span><b>
+          {{ getProduct(auction?.productId)?.productYOM }} | </b> <span>Total Quantity Available
+          : </span><b>{{ auction?.availableQty }} </b>
+      </h5>
+      <h5 style="color: #3b3b3b; font-size: 14px;"><span>Sold by :
+        </span><b>SLR{{getProduct(auction?.productId)?.sellerId }}</b>
+      </h5>
+
+      <h5 style="color: #3b3b3b; font-size: 14px;"><span>EMD Amount: <b style="font-size:20px;">
+        &#8377;{{ auction?.emdAmount }} </b></span>
+      </h5>
+
+      <h5 style="color: #3b3b3b; font-size: 14px;"><span>Bid Start Price: <b style="font-size:20px;">
+            &#8377;{{ auction?.startBidAmount }} </b></span>
+      </h5>
+      <h5 style="color: #3b3b3b; font-size: 14px;">
+        <span>Minimum Increment Value:</span>
+        <span><b style="font-size:16px;"> &#8377;{{ auction?.minIncrementValue }} </b></span>
+      </h5>
+      <h5 style="color: #3b3b3b; font-size: 14px;" *ngIf="(auctionState=='live') && auction?.currentBidAmount">
+        <span>Current Bid Price:</span>
+        <span><b style="font-size:22px;"> &#8377;{{ auction?.currentBidAmount }} </b></span>
+      </h5>
+      <h5 style="color: #3b3b3b; font-size: 14px;">
+        <span>Start Time:</span>
+        <span><b style="color: green;"> {{ auction?.startDate }} </b></span>
+        <br>
+        <span>End Time:</span>
+        <span><b style="color: red;"> {{ auction?.endDate }} </b></span>
+      </h5>
+      <h5 style="color: #3b3b3b; font-size: 14px;">
+        <span>Auction State:</span>
+        <span><b style="font-size:16px;"> {{ auction?.auctionState }} </b></span>
+      </h5>
+
+      <h5 style="color: #3b3b3b; font-size: 14px;" *ngIf="auctionState=='closed' && auction?.currentBidAmount">
+        <span>Highest Bid Price</span>
+        <span><b style="font-size:22px;"> &#8377;{{auction?.currentBidAmount }} </b></span>
+      </h5>
+
+      <h5 style="color: #3b3b3b; font-size: 14px;" *ngIf="auctionState=='closed'">
+        <span>Winner:</span>
+        <span><b style="font-size:18px;"> BYR{{auction?.winnerId}} </b></span>
+      </h5>
+
+
+    </div>
+  </div>
+</div>
+
+<div class="emd" *ngIf="buyer && auctionState=='live' && !emdPaid">
+  <p style="font-size: 16px; color: #194274;">Please pay the EMD amount before placing your bid! <br></p>
+  <button id="rzp-button1" (click)="payEMD()">Pay EMD</button>
+</div>
+
+<div class="emd" *ngIf="buyer && auctionState=='live' && emdPaid">
+  <p style="font-size: 16px; color: #194274;">You have successfully paid the EMD amount and can proceed to bid now! <br></p>
+</div>
+
+
+<div class="bid" *ngIf="buyer && auctionState=='live' && emdPaid && !bidMade">
+
+  <div class="form-group" [formGroup]="addBidForm">
+    <div class="my-form">
+      <div style="margin-bottom: 20px; width: 60%;">
+        <input id="bidPricePerUnit" name="bidPricePerUnit" formControlName="bidPricePerUnit" type="number"
+          class="form-control" style="width: 50%;" placeholder="Enter Bid Price Per Unit" />
+        <div *ngIf="addBidForm?.get('bidPricePerUnit')?.touched && addBidForm.get('bidPricePerUnit')?.invalid"
+          class="text-danger small">
+          <div *ngIf="addBidForm?.get('bidPricePerUnit').errors['required']">Bid Price is required.</div>
+        </div>
+      </div>
+
+      <div style="width: 60%;">
+        <input id="bidQty" name="bidQty" formControlName="bidQty" type="number" class="form-control" style="width: 50%;"
+          placeholder="Enter Bid Quantity" />
+        <div *ngIf="addBidForm?.get('bidQty')?.touched && addBidForm.get('bidQty')?.invalid" class="text-danger small">
+          <div *ngIf="addBidForm?.get('bidQty').errors['required']">Bid Quantity is required.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="btn-container">
+    <a (click)="addBid()" class="add-bid-btn">Bid Now</a>
+  </div>
+
+</div>
+
+<div class="emd" *ngIf="buyer && auctionState=='live' && emdPaid && bidMade">
+  <p style="font-size: 16px;">Note: You have already placed a bid for this auction. You can modify it below. <br></p>
+
+</div>
+
+<!-- tabs -->
+<div class="tab-container">
+  <div class="tabs">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'description'"
+          (click)="activeTab = 'description'">Description</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'features'" (click)="activeTab = 'features'">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'reviews'" (click)="activeTab = 'reviews'">Reviews</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'documents'" (click)="activeTab = 'documents'">Documents</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'videos'" (click)="activeTab = 'videos'">Videos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'youtubeLinks'" (click)="activeTab = 'youtubeLinks'">YouTube
+          Links</a>
+      </li>
+    </ul>
+
+  </div>
+  <div class="tab-content">
+    <div *ngIf="activeTab === 'description'">
+      {{getProduct(auction?.productId)?.productDesc}}
+    </div>
+    <div *ngIf="activeTab === 'features'">
+      {{getProduct(auction?.productId)?.productFeatures}}
+    </div>
+    <div *ngIf="activeTab === 'reviews'">
+      <div class="review-list">
+        <ul>
+          <li *ngFor="let review of reviews">
+            <p>Rating from BYR{{review.userId}} : {{ review.rating }}/10 ({{review.reviewTime}})</p>
+            <p>Comment: {{ review.comment }}</p>
+          </li>
+        </ul>
+      </div>
+
+
+      <div class="review-form" *ngIf="buyer">
+        <div class="form-container mat-elevation-z3">
+          <form class="form mt-4 col-md-10" [formGroup]="addReviewForm" nonvalidate
+            style="display: flex; flex-direction: column; height: 180px;">
+            <div class="form-group row">
+              <div class="col-md-6">
+                <input id="rating" name="rating" formControlName="rating" type="number" class="form-control"
+                  style="min-height: 40px; width: 300px;" placeholder="Enter Rating" />
+                <div *ngIf="addReviewForm?.get('rating')?.touched && addReviewForm.get('rating')?.invalid"
+                  class="text-danger small">
+                  <div *ngIf="addReviewForm?.get('rating').errors['required']">Rating is required.</div>
+                  <div *ngIf="addReviewForm?.get('rating').errors['min']">Rating must be greater than or equal to 1.
+                  </div>
+                  <div *ngIf="addReviewForm?.get('rating').errors['max']">Rating must be less than or equal to 10.</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <textarea id="comment" name="comment" formControlName="comment" class="form-control"
+                  placeholder="Enter Comment" style="min-height: 40px; width: 300px;"></textarea>
+                <div *ngIf="addReviewForm?.get('comment')?.touched && addReviewForm.get('comment')?.invalid"
+                  class="text-danger small">
+                  <div *ngIf="addReviewForm?.get('comment').errors['required']">Comment is required.</div>
+                </div>
+              </div>
+            </div>
+            <div class="review-btn-container">
+              <a class="review-btn" (click)="addReview()">Submit</a>
+              <a class="review-btn" routerLink="">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activeTab === 'documents'">
+      Documents
+    </div>
+    <div *ngIf="activeTab === 'videos'">
+      Videos
+    </div>
+    <div *ngIf="activeTab === 'youtubeLinks'">
+      YouTube Links
+    </div>
+  </div>
+</div>
+
+<!-- <mat-divider *ngIf="buyer" style="margin-top: 20px;"></mat-divider> -->
+
+<div class="my-bids" *ngIf="buyer">
+
+  <h2 style="color: #0071B9; font-size: 28px; font-weight: 600; margin-top: 28px">My Bids</h2>
+  <!-- <mat-form-field>
+    <input matInput placeholder="Search" class="my-filter-input" (keyup)="myBidFilterChange($event)">
+  </mat-form-field> -->
+  <div class="top">
+    <form class="my-form-field">
+      <input placeholder="Search" class="my-filter-input" (keyup)="myBidFilterChange($event)">
+    </form>
+  </div>
+
+  <div class="mat-elevation-z3" style="display: inline-table;">
+    <div class="form-group" [formGroup]="editBidForm">
+
+      <table mat-table matSort [dataSource]="myBidDataSource" class="mat-elevation-z3">
+
+        <ng-container matColumnDef="sNo">
+          <th mat-header-cell *matHeaderCellDef style="background-color: #494848;"> S No. </th>
+          <td mat-cell *matCellDef="let item; let i = index">
+            {{ (paginatorRef.pageIndex * paginatorRef.pageSize) + (i + 1) }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="buyerId">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Buyer Id </th>
+          <td mat-cell *matCellDef="let element">
+            BYR{{element.buyerId}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="bidPricePerUnit">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Bid Price Per Unit
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="!isEditing">
+              {{ element.bidPricePerUnit }}
+            </ng-container>
+            <ng-container *ngIf="isEditing">
+
+              <input id="bidPricePerUnit" name="bidPricePerUnit" formControlName="bidPricePerUnit" type="number"
+                class="form-control" placeholder="Enter Bid Price Per Unit" />
+
+            </ng-container>
+
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="bidQty">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Bid Quantity </th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="!isEditing">
+              {{ element.bidQty }}
+            </ng-container>
+            <ng-container *ngIf="isEditing">
+              <input id="bidQty" name="bidQty" formControlName="bidQty" type="number" class="form-control"
+                placeholder="Enter Bid Quantity" />
+            </ng-container>
+          </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="bidAmount">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Bid Amount </th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="!isEditing">
+              {{ element.bidPricePerUnit }}
+            </ng-container>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="bidDate">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Bid Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.bidDate}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="modify">
+          <th mat-header-cell *matHeaderCellDef style="background-color: #494848;">
+            <div *ngIf="!(auctionState=='closed') && emdPaid">
+              Modify Bid
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="!isEditing">
+              <a (click)="modifyBid(element)" *ngIf="!(auctionState=='closed') && emdPaid">
+                <fa-icon [icon]="faEdit" class="fa-xl edit-icon"></fa-icon>
+              </a>
+            </ng-container>
+            <ng-container *ngIf="isEditing">
+              <a (click)="editBid(element)">
+                <fa-icon [icon]="faCheck" class="fa-xl check-icon" style="margin-right: 20px;"></fa-icon>
+              </a>
+              <a (click)="cancelBid(element)">
+                <fa-icon [icon]="faTimes" class="fa-xl cancel-icon"></fa-icon>
+              </a>
+            </ng-container>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="myBidDisplayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: myBidDisplayedColumns;" class="my-table-row"></tr>
+      </table>
+    </div>
+
+    <mat-paginator class="my-paginator" #paginatorRef [length]="myBidDataSource?.data?.length" [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+
+  </div>
+
+</div>
+
+<!-- <mat-divider></mat-divider> -->
+
+<div class="all-bids">
+
+  <h2 style="color: #0071B9; font-size: 28px; font-weight: 600; margin-top: 28px">All Bids</h2>
+  <!-- <mat-form-field>
+    <input matInput placeholder="Search" class="my-filter-input" (keyup)="allBidsFilterChange($event)">
+  </mat-form-field> -->
+  <div class="top">
+    <form class="my-form-field">
+      <input placeholder="Search" class="my-filter-input" (keyup)="allBidsFilterChange($event)">
+    </form>
+  </div>
+
+  <div class="mat-elevation-z3" style="display: inline-table;">
+
+    <table mat-table matSort [dataSource]="allBidsDataSource" class="mat-elevation-z3">
+
+      <ng-container matColumnDef="sNo">
+        <th mat-header-cell *matHeaderCellDef style="background-color: #494848;"> S No. </th>
+        <td mat-cell *matCellDef="let item; let i = index">
+          {{ (paginatorRef.pageIndex * paginatorRef.pageSize) + (i + 1) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="buyerId">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Buyer Id </th>
+        <td mat-cell *matCellDef="let element">
+          BYR{{element.buyerId}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="bidPricePerUnit">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Bid Price Per Unit
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.bidPricePerUnit}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="bidQty">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Bid Quantity </th>
+        <td mat-cell *matCellDef="let element"> {{element.bidQty}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="bidAmount">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Bid Amount </th>
+        <td mat-cell *matCellDef="let element"> {{element.bidAmount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="bidDate">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Bid Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.bidDate}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="allBidsDisplayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: allBidsDisplayedColumns;" class="my-table-row"></tr>
+    </table>
+
+    <mat-paginator class="my-paginator" #paginatorRef [length]="allBidsDataSource?.data?.length" [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+
+  </div>
+
+
+</div>
+

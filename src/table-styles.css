@@ -1,0 +1,65 @@
+/* writing common CSS for tables */
+
+.mat-elevation-z3 {
+  width: 100%;
+}
+
+.mat-table {
+  overflow-x: auto;
+}
+
+.my-paginator {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 12px;
+}
+
+th {
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  border-right: 1px solid #e0e0e0;
+  white-space: nowrap;
+}
+
+td {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  border-right: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.my-table-row:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.my-table-row:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.my-filter-input {
+  width: 100%;
+}
+
+.my-divider {
+  margin: 50px auto;
+}
+
+/* .delete-icon {
+  color : #D11933;
+}
+
+.edit-icon {
+  color: #82BB41;
+} */
+
+.delete-icon {
+  color : #858585;
+}
+
+.edit-icon {
+  color: #858585;
+}

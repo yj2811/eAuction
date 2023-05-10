@@ -1,0 +1,84 @@
+<h2 style="color: #0071B9; font-size: 28px; font-weight: 600; margin-top: 28px" *ngIf="admin">Manage Categories</h2>
+<h2 style="color: #0071B9; font-size: 28px; font-weight: 600; margin-top: 28px" *ngIf="user">All Categories</h2>
+
+<!-- <mat-form-field>
+  <input matInput placeholder="Search" class="my-filter-input" (keyup)="filterChange($event)">
+</mat-form-field> -->
+<div class="top">
+
+  <form class="my-form-field">
+    <input placeholder="Search" class="my-filter-input" (keyup)="filterChange($event)">
+  </form>
+  <a routerLink='/admin-dashboard/add-category' class="top-add-category-btn" *ngIf="admin">Add Category</a>
+  <a routerLink='/seller-dashboard/add-category' class="top-add-category-btn" *ngIf="user">Add Category</a>
+</div>
+
+<div class="mat-elevation-z3" style="display: inline-table;">
+
+<table mat-table matSort [dataSource]="dataSource" >
+
+  <ng-container matColumnDef="sNo">
+    <th mat-header-cell *matHeaderCellDef style="background-color: #494848;"> S No. </th>
+    <td mat-cell *matCellDef="let item; let i = index">
+      {{ (paginatorRef.pageIndex * paginatorRef.pageSize) + (i + 1) }}
+   </td>
+  </ng-container>
+
+  <ng-container matColumnDef="categoryId">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Category Id </th>
+    <td mat-cell *matCellDef="let element"> CAT{{element.categoryId}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="categoryName">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Category Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef style="background-color: #494848;"> Status </th>
+    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="handleStatus">
+    <th mat-header-cell *matHeaderCellDef style="background-color: #494848;"> Handle Status </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-slide-toggle
+        [checked]="element.status === 'approved'"
+        (change)="element.status = $event.checked ? 'approved' : 'denied';
+                   $event.checked ? approveCategory(element) : denyCategory(element)">
+        {{ element.status === 'approved' ? 'Approved' : 'Denied' }}
+      </mat-slide-toggle>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef style="background-color: #494848;"> </th>
+    <td mat-cell *matCellDef="let element"> <a (click)="editCategory(element)">
+        <fa-icon [icon]="faEdit" class="fa-xl edit-icon"></fa-icon>
+      </a> </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef style="background-color: #494848;"> </th>
+    <td mat-cell *matCellDef="let element"> <a (click)="deleteCategory(element)"><fa-icon [icon]="faTrashAlt" class="fa-xl delete-icon"></fa-icon></a> </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"class="my-table-row"></tr>
+</table>
+
+<mat-paginator class="my-paginator"
+#paginatorRef
+[length]="dataSource?.data?.length"
+[pageSize]="10"
+[pageSizeOptions]="[5, 10, 25, 100]"
+showFirstLastButtons></mat-paginator>
+
+</div>
+
+<!-- <div class="btn-container">
+  <a routerLink='/admin-dashboard/add-category' class="add-category-btn" *ngIf="admin">Add Category</a>
+  <a routerLink='/seller-dashboard/add-category' class="add-category-btn" *ngIf="user">Add Category</a>
+</div> -->
+
+

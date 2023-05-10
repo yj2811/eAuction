@@ -1,0 +1,19 @@
+.top {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.my-filter-input {
+  padding: 4px;
+  font-size: 15px;
+  color: #575757;
+  width: 50px;
+  margin-bottom: 22px;
+}
+
+.my-filter-input:focus {
+  outline: none;
+  border-radius: 2px;
+  border: 2px solid #0072BB;
+}

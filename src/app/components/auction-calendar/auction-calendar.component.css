@@ -1,0 +1,32 @@
+.product-image{
+  object-fit: contain;
+  height: 60px;
+  width: 100%;
+}
+
+.my-table{
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 20px;
+  margin-bottom: 70px;
+}
+
+.top {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.my-filter-input {
+  padding: 4px;
+  font-size: 15px;
+  color: #575757;
+  width: 100%;
+  margin-bottom: 22px;
+}
+
+.my-filter-input:focus {
+  outline: none;
+  border-radius: 2px;
+  border: 2px solid #0072BB;
+}

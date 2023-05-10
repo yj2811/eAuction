@@ -1,0 +1,379 @@
+<div class="sidebar">
+
+  <!-- <h5 matSubheader class="dashboard-heading text-center">Dashboard</h5> -->
+  <h5 matSubheader style="cursor: pointer;" class="dashboard-heading text-center" [routerLink]="adminSidebar ? 'requests' : sellerSidebar ? 'list-auctions' : 'list-bids'">Dashboard</h5>
+
+  <!-- ADMIN -->
+  <mat-divider *ngIf="adminSidebar"></mat-divider>
+
+  <!-- <mat-accordion *ngIf="adminSidebar">
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          User Management
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <mat-nav-list>
+        <a class="options" routerLinkActive="list-item-active" routerLink="add-user">
+          Create Buyer/Seller
+        </a>
+      </mat-nav-list>
+
+      <mat-divider *ngIf="adminSidebar"></mat-divider>
+
+      <mat-nav-list>
+        <a class="options" routerLinkActive="list-item-active" routerLink="list-users">
+          Manage Users
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion> -->
+
+  <mat-accordion *ngIf="adminSidebar">
+    <mat-expansion-panel [expanded]="true" routerLink="list-users">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active">
+          User Management
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="adminSidebar"></mat-divider>
+
+  <mat-accordion *ngIf="adminSidebar">
+    <mat-expansion-panel [expanded]="true" routerLink="list-products">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active">
+          Product Management
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="adminSidebar"></mat-divider>
+
+  <mat-accordion *ngIf="adminSidebar">
+    <mat-expansion-panel [expanded]="true" routerLink="list-categories">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active">
+          Category Management
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="adminSidebar"></mat-divider>
+
+  <mat-accordion *ngIf="adminSidebar">
+    <mat-expansion-panel [expanded]="true" routerLink="list-auctions">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active">
+          Auction Management
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="adminSidebar"></mat-divider>
+
+  <mat-accordion *ngIf="adminSidebar">
+    <mat-expansion-panel [expanded]="true" routerLink="list-winners">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active">
+          Winner Management
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="adminSidebar"></mat-divider>
+
+  <mat-accordion *ngIf="adminSidebar">
+    <mat-expansion-panel [expanded]="true" routerLink="requests">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active">
+          Requests
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="adminSidebar"></mat-divider>
+
+  <mat-accordion *ngIf="adminSidebar">
+    <mat-expansion-panel [expanded]="true" routerLink="sample-product-request">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active">
+          Sample Product Request
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="adminSidebar"></mat-divider>
+
+
+  <mat-accordion *ngIf="adminSidebar">
+    <mat-expansion-panel [expanded]="true" routerLink="product-reviews">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active">
+          Product Reviews
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="adminSidebar"></mat-divider>
+
+
+  <mat-accordion *ngIf="adminSidebar">
+    <mat-expansion-panel [expanded]="true" routerLink="my-profile">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active">
+          My Profile
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="adminSidebar"></mat-divider>
+
+
+  <!-- SELLER -->
+  <mat-divider *ngIf="sellerSidebar"></mat-divider>
+
+  <!-- <mat-accordion *ngIf="sellerSidebar">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Product Management
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a class="options" routerLinkActive="list-item-active" routerLink="add-category">
+          Create Category
+        </a>
+      </mat-nav-list>
+
+      <mat-divider *ngIf="sellerSidebar"></mat-divider>
+
+      <mat-nav-list>
+        <a class="options" routerLinkActive="list-item-active" routerLink="list-categories">
+          All Categories
+        </a>
+      </mat-nav-list>
+
+      <mat-divider *ngIf="sellerSidebar"></mat-divider>
+
+      <mat-nav-list>
+        <a class="options" routerLinkActive="list-item-active" routerLink="add-product">
+          Create Product
+        </a>
+      </mat-nav-list>
+
+      <mat-divider *ngIf="sellerSidebar"></mat-divider>
+
+      <mat-nav-list>
+        <a class="options" routerLinkActive="list-item-active" routerLink="list-products">
+          My Products
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="sellerSidebar"></mat-divider>
+
+  <mat-accordion *ngIf="sellerSidebar">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Auction Management
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <mat-nav-list>
+        <a class="options" routerLinkActive="list-item-active" routerLink="add-auction">
+          Create Auction
+        </a>
+      </mat-nav-list>
+
+      <mat-divider *ngIf="sellerSidebar"></mat-divider>
+
+      <mat-nav-list>
+        <a class="options" routerLinkActive="list-item-active" routerLink="list-auctions">
+          My Auctions
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="sellerSidebar"></mat-divider>
+
+  <mat-accordion *ngIf="sellerSidebar">
+    <mat-expansion-panel hideToggle="true" class="no-body">
+      <mat-expansion-panel-header class="no-body">
+        <mat-panel-title routerLinkActive="list-item-active" routerLink="">
+          Sample Product Request
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="sellerSidebar"></mat-divider>
+
+  <mat-accordion *ngIf="sellerSidebar">
+    <mat-expansion-panel hideToggle="true" class="no-body">
+      <mat-expansion-panel-header class="no-body">
+        <mat-panel-title routerLinkActive="list-item-active" routerLink="">
+          My Profile
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="sellerSidebar"></mat-divider> -->
+
+
+  <mat-accordion *ngIf="sellerSidebar">
+    <mat-expansion-panel [expanded]="true" routerLink="list-products">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active">
+          Product Management
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="sellerSidebar"></mat-divider>
+
+  <mat-accordion *ngIf="sellerSidebar">
+    <mat-expansion-panel [expanded]="true" routerLink="list-categories">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active">
+          Category Management
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="sellerSidebar"></mat-divider>
+
+  <mat-accordion *ngIf="sellerSidebar">
+    <mat-expansion-panel [expanded]="true" routerLink="list-auctions">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active">
+          Auction Management
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="sellerSidebar"></mat-divider>
+
+  <mat-accordion *ngIf="sellerSidebar">
+    <mat-expansion-panel [expanded]="true" routerLink="sample-product-request">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active" >
+          Sample Product Request
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="sellerSidebar"></mat-divider>
+
+
+  <mat-accordion *ngIf="sellerSidebar">
+    <mat-expansion-panel [expanded]="true" routerLink="product-reviews">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active">
+          Product Reviews
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="sellerSidebar"></mat-divider>
+
+
+  <mat-accordion *ngIf="sellerSidebar">
+    <mat-expansion-panel [expanded]="true" routerLink="my-profile">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active">
+          My Profile
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="sellerSidebar"></mat-divider>
+
+
+  <!-- BUYER -->
+
+  <mat-divider *ngIf="buyerSidebar"></mat-divider>
+
+  <mat-accordion *ngIf="buyerSidebar">
+    <mat-expansion-panel [expanded]="true" routerLink="list-bids">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active">
+          My Bids
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+  <mat-divider *ngIf="buyerSidebar"></mat-divider>
+
+  <mat-accordion *ngIf="buyerSidebar">
+    <mat-expansion-panel [expanded]="true" [routerLink]="['list-auctions', 'live']">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active">
+          Live Auctions
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="buyerSidebar"></mat-divider>
+
+  <mat-accordion *ngIf="buyerSidebar">
+    <mat-expansion-panel [expanded]="true" [routerLink]="['list-auctions', 'upcoming']">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active">
+          Upcoming Auctions
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="buyerSidebar"></mat-divider>
+
+  <mat-accordion *ngIf="buyerSidebar">
+    <mat-expansion-panel [expanded]="true" [routerLink]="['list-auctions', 'closed']">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active">
+          Closed Auctions
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="buyerSidebar"></mat-divider>
+
+  <mat-accordion *ngIf="buyerSidebar">
+    <mat-expansion-panel [expanded]="true" routerLink="my-profile">
+      <mat-nav-list>
+        <a routerLinkActive="list-item-active">
+          My Profile
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-divider *ngIf="buyerSidebar"></mat-divider>
+
+</div>

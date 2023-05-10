@@ -1,0 +1,211 @@
+<div class="home">
+  <div class="vertical-bar">
+
+  </div>
+  <div class="text">
+    <p class="text-heading"> Where Bidding Meets</p>
+    <p class="auto-input"></p>
+    <p class="text-body"> Discover a one-stop destination for all your auction needs! </p>
+    <button routerLink="register" class="btn">Sign Up Now</button>
+  </div>
+</div>
+
+<div class="carousel-container" [style.backgroundColor]="carouselBackgroundColor">
+
+  <ngb-carousel *ngIf="popularAuctions" class="col-md-7" #carousel (slide)="onSlide(carousel)">
+    <ng-template *ngFor="let auction of popularAuctions" ngbSlide>
+
+      <div class="my-carousel">
+        <div>
+          <img class="product-header-image" [src]="imgBasePath + getImage(auction.productId)" />
+        </div>
+        <div class="auction-details">
+          <div>
+            <h2 style="margin-top: 10px; color: #194274; font-size: 30px;">
+              {{ getProduct(auction.productId)?.productName }}
+            </h2>
+
+            <h5 style="color: #194274; font-size: 14px;"><span> (Category:
+                {{ getCategory(getProduct(auction.productId)?.categoryId)?.categoryName }}) </span></h5>
+            <h5 style="color: #5A5A5A; font-size: 14px;">
+              <span>{{ getProduct(auction.productId)?.productDesc }} |
+                {{ getProduct(auction.productId)?.productFeatures }}</span></h5>
+
+            <h5 style="color: #5A5A5A; font-size: 14px;"><span>Year of Manufacturing :</span><b>
+                {{ getProduct(auction.productId)?.productYOM }} | </b> <span>Total Quantity Available
+                : </span><b>{{ auction.availableQty }} </b> </h5>
+
+            <h5 style="color: #5A5A5A; font-size: 14px;"><span>Sold by :
+              </span><b>SLR{{getProduct(auction.productId)?.sellerId}} </b></h5>
+
+            <h5 style="color: #5A5A5A; font-size: 14px;"><span>EMD Amount: <b style="font-size:16px;">
+              &#8377;{{ auction.emdAmount }} </b></span></h5>
+
+            <h5 style="color: #5A5A5A; font-size: 14px;"><span>Bid Start Price: <b style="font-size:16px;">
+                  &#8377;{{ auction.startBidAmount }} </b></span></h5>
+
+            <h5 style="color: #5A5A5A; font-size: 14px;">
+              <span>Current Bid Price:</span>
+              <span><b style="font-size:16px;"> &#8377;{{ auction.currentBidAmount }} </b></span>
+            </h5>
+
+            <h5 style="color: #5A5A5A; font-size: 14px;">
+              <span>Start Time:</span>
+              <span><b style="color: green;"> {{ auction.startDate }} </b></span>
+              <br>
+              <span>End Time:</span>
+              <span><b style="color: red;"> {{ auction.endDate }} </b></span>
+            </h5>
+            <div>
+              <button class="bid-now-btn" (click)="viewAuction(auction)">Bid Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+
+
+  <div class="carousel-text col-md-5">
+    <p class="carousel-text-heading"> <em>Your Ultimate Auction Destination </em></p>
+    <p class="carousel-text-heading-2"> Join Our Community Today</p>
+    <p class="carousel-text-body">Ready to score some amazing deals? Our e-auction portal offers buyers and sellers a
+      user-friendly platform to find the best bargains on the market. Join our community now and start bidding on a
+      variety of items! </p>
+
+    <button routerLink="/auction-calendar" class="btn">Explore Auctions</button>
+
+  </div>
+
+
+</div>
+
+
+<div class="display-auctions">
+
+  <h2 style="color: #0072BB; font-size: 32px; font-weight: 600; text-align: center;">Live Auctions</h2>
+
+  <!-- slides -->
+  <owl-carousel-o [options]="customOptions" class="my-owl-carousel">
+    <ng-container *ngFor="let auction of liveAuctions">
+      <ng-template carouselSlide [id]="auction.auctionId.toString()">
+        <div (click)="viewAuction(auction)" class="product">
+          <img class="product-img" [src]="imgBasePath + getImage(auction.productId)" alt="">
+
+          <div class="product-info">
+            <span
+              style="margin-top: 16px; color: #194274; font-size: 20px; text-align: center;">{{ getProduct(auction.productId)?.productName }}
+            </span>
+
+            <span style="color: #194274; font-size: 14px; margin-bottom: 2px; margin-top: 8px;"><span> Category:
+                {{ getCategory(getProduct(auction.productId)?.categoryId)?.categoryName }} </span></span>
+
+            <!-- <span style="color: #5A5A5A;"><span>Sold by :
+              </span>{{ getUser(getProduct(auction.productId)?.sellerId)?.firstName }}
+                {{ getUser(getProduct(auction.productId)?.sellerId)?.lastName }} </span> -->
+
+            <span style="color: rgb(40, 40, 40); margin-bottom: 2px; font-size: 12px;"><span>(SOLD BY : SLR</span>{{(getProduct(auction.productId)?.sellerId)}})</span>
+
+            <span style="color: #5A5A5A;"><span>Bid Start Price: <b style="font-size: 16px;">
+                  &#8377;{{ auction.startBidAmount }} </b></span></span>
+
+            <span style="color: #5A5A5A;"><span>Current Bid Price:</span><span><b style="font-size:18px;">
+              &#8377;{{ auction.currentBidAmount }} </b></span></span>
+
+            <span style="color: #5A5A5A;">Ends on: <span style="color: red; font-size: 16px;"> {{ auction.endDate }} </span></span>
+
+          </div>
+
+          <button (click)="viewAuction(auction)" type="button" class="view-auction-btn">View Auction </button>
+
+        </div>
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o>
+
+</div>
+
+<div class="display-auctions">
+
+  <h2 style="color: #0072BB; font-size: 32px; font-weight: 600; text-align: center;">Upcoming Auctions</h2>
+
+  <!-- slides -->
+  <owl-carousel-o [options]="customOptions" class="my-owl-carousel">
+    <ng-container *ngFor="let auction of upcomingAuctions">
+      <ng-template carouselSlide [id]="auction.auctionId.toString()">
+        <div (click)="viewAuction(auction)" class="product">
+          <img class="product-img" [src]="imgBasePath + getImage(auction.productId)" alt="">
+
+          <div class="product-info">
+            <span
+              style="margin-top: 16px; color: #194274; font-size: 20px; text-align: center;">{{ getProduct(auction.productId)?.productName }}
+            </span>
+
+            <span style="color: #194274; font-size: 14px; margin-bottom: 2px; margin-top: 8px;"><span> Category:
+              {{ getCategory(getProduct(auction.productId)?.categoryId)?.categoryName }} </span></span>
+
+          <!-- <span style="color: #5A5A5A;"><span>Sold by :
+            </span>{{ getUser(getProduct(auction.productId)?.sellerId)?.firstName }}
+              {{ getUser(getProduct(auction.productId)?.sellerId)?.lastName }} </span> -->
+
+          <span style="color: rgb(40, 40, 40); margin-bottom: 2px; font-size: 12px;"><span>(SOLD BY : SLR</span>{{(getProduct(auction.productId)?.sellerId)}})</span>
+
+            <span style="color: #5A5A5A;"><span>Bid Start Price: <b style="font-size:16px;">
+                  &#8377;{{ auction.startBidAmount }} </b></span></span>
+
+
+            <span style="color: #5A5A5A;">Starts on: <span style="color: green;"> {{ auction.startDate }} </span></span>
+            <span style="color: #5A5A5A;">Ends on: <span style="color: red;"> {{ auction.endDate }} </span></span>
+
+          </div>
+
+          <button (click)="viewAuction(auction)" type="button" class="view-auction-btn">View Auction </button>
+
+        </div>
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o>
+
+</div>
+
+<div class="display-auctions">
+
+  <h2 style="color: #0072BB; font-size: 32px; font-weight: 600; text-align: center;">Closed Auctions</h2>
+
+  <!-- slides -->
+  <owl-carousel-o [options]="customOptions" class="my-owl-carousel">
+    <ng-container *ngFor="let auction of closedAuctions">
+      <ng-template carouselSlide [id]="auction.auctionId.toString()">
+        <div (click)="viewAuction(auction)" class="product">
+          <img class="product-img" [src]="imgBasePath + getImage(auction.productId)" alt="">
+
+          <div class="product-info">
+            <span
+              style="margin-top: 16px; color: #194274; font-size: 20px; text-align: center;">{{ getProduct(auction.productId)?.productName }}
+            </span>
+
+            <span style="color: #194274; font-size: 14px; margin-bottom: 2px; margin-top: 8px;"><span> Category:
+              {{ getCategory(getProduct(auction.productId)?.categoryId)?.categoryName }} </span></span>
+
+          <!-- <span style="color: #5A5A5A;"><span>Sold by :
+            </span>{{ getUser(getProduct(auction.productId)?.sellerId)?.firstName }}
+              {{ getUser(getProduct(auction.productId)?.sellerId)?.lastName }} </span> -->
+
+          <span style="color: rgb(40, 40, 40); margin-bottom: 2px; font-size: 12px;"><span>(SOLD BY : SLR</span>{{(getProduct(auction.productId)?.sellerId)}})</span>
+
+            <span style="color: #5A5A5A;"><span>Bid Start Price: <b style="font-size:16px;">
+                  &#8377;{{ auction.startBidAmount }} </b></span></span>
+
+            <span style="color: #5A5A5A;"><span>Highest Bid Price:</span><span><b style="font-size:18px;">
+              &#8377;{{ auction.currentBidAmount }} </b></span></span>
+
+          </div>
+
+          <button (click)="viewAuction(auction)" type="button" class="view-auction-btn">View Auction </button>
+
+        </div>
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o>
+
+</div>

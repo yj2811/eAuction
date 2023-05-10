@@ -1,0 +1,36 @@
+.dashboard-heading {
+  color: white;
+  font-size: 22px;
+  font-weight: 600;
+  padding-top: 10px;
+}
+
+.mat-expansion-panel {
+  height: 40px;
+  background-color: #E3F1F9;
+  border-radius: 0 !important;
+  cursor: pointer;
+}
+
+.mat-expansion-panel:hover{
+  background-color: white;
+}
+
+mat-nav-list {
+  height: 30px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+a{
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.sidebar {
+  width: 300px;
+}

@@ -1,0 +1,48 @@
+<div class="background">
+  <div class="text">
+    <p class="login-text"> Log In</p>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="text-center text-danger">
+    <p>{{loginError}}</p>
+    </div>
+    <div class="card mb-6 mt-6">
+      <div class="card-body">
+        <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)" autocomplete="off">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-3">
+                <label for="email" style="font-size: 14px; font-weight: 600; color: #5A5A5A">Email:</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="email" name="email" formControlName="email" autocomplete="off" class="form-control mb-3">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-3">
+                <label for="password" style="font-size: 14px; font-weight: 600; color: #5A5A5A">Password:</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="password" name="password" formControlName="password" autocomplete="off" class="form-control mb-3">
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center">
+            <button type="submit" class="login-btn">Login</button>
+          </div>
+          <div class="text-center mt-3">
+            <p class="text-muted" style="display: inline-block;">New user?</p>
+            <a class="btn btn-link" style="font-size: 14px; display: inline-block;" (click)="openRegister()">Click here to register</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
